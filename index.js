@@ -5,6 +5,8 @@ const md5File = require("md5-file");
 const color = require("ansi-colors");
 const loaderUtils = require('loader-utils');
 
+const uploadCache = {};
+
 /**
  *
  * @param {Object} options
@@ -46,7 +48,6 @@ module.exports = function(source, map, meta) {
     bucket
   });
 
-  const uploadCache = {};
   let count = 0;
 
   const formatStr = formats.reduce((result, format) => {
@@ -54,7 +55,7 @@ module.exports = function(source, map, meta) {
 
     return `.${format}`
   }, '')
-  const reg = new RegExp(`@oss/\\S+(${formatStr})`, 'gi')
+  const reg = new RegExp(`${prefix}/\\S+(${formatStr})`, 'gi')
   let content = source;
 
   const matches = content.match(reg);
@@ -84,6 +85,9 @@ module.exports = function(source, map, meta) {
 
       const fileKey = md5File.sync(realPath);
       if (uploadCache[fileKey]) {
+        if (typeof uploadCache[fileKey] !== "boolean") {
+          content = content.replace(new RegExp(match, "g"), uploadCache[fileKey].url);
+        }
         checkTask();
         continue;
       }
@@ -104,6 +108,7 @@ module.exports = function(source, map, meta) {
           );
           content = content.replace(new RegExp(match, "g"), result.url);
           count -= 1;
+          uploadCache[fileKey] = result
           checkTask();
         })
         .catch(error => {
