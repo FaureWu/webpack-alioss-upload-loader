@@ -1,0 +1,31 @@
+{
+  "name": "alioss-upload-loader",
+  "version": "1.0.0",
+  "description": "a webpack loader for alioss upload",
+  "main": "index.js",
+  "scripts": {
+    "release": "npm publish --access=public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaureWu/webpack-alioss-upload-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "alioss",
+    "upload"
+  ],
+  "author": "FaureWu <502556093@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FaureWu/webpack-alioss-upload-loader/issues"
+  },
+  "homepage": "https://github.com/FaureWu/webpack-alioss-upload-loader#readme",
+  "dependencies": {
+    "ali-oss": "^6.0.1",
+    "ansi-colors": "^3.2.1",
+    "loader-utils": "^1.1.0",
+    "md5-file": "^4.0.0"
+  }
+}
