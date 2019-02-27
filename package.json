@@ -1,6 +1,6 @@
 {
   "name": "alioss-upload-loader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a webpack loader for alioss upload",
   "main": "index.js",
   "scripts": {

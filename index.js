@@ -55,7 +55,7 @@ module.exports = function(source, map, meta) {
 
     return `.${format}`
   }, '')
-  const reg = new RegExp(`${prefix}/\\S+(${formatStr})`, 'gi')
+  const reg = new RegExp(`${prefix}\/[a-zA-Z-_\u4e00-\u9fa5/0-9@#!~]+(${formatStr})`, 'gi')
   let content = source;
 
   const matches = content.match(reg);
